@@ -1,0 +1,33 @@
+// 为要序列化的每个数据结构添加消息，然后为消息中的每个字段指定名称和类型。
+//syntax = "proto2";    // 指定版本，若使用proto3则一定需要指定
+package tutorial;     // 指定包名，以防止协议消息类型之间的名称冲突,生成.pb.h文件转化成命名空间字段
+
+// required : 必填字段，否则消息将被视为未初始化，libprotobuf在调试模式下编译，则序列化未初始化的消息将导致断言失败，解析未初始化的消息将始终失败（通过从解析方法返回false）
+// optional : 可选字段，该字段可能已设置，也可能未设置。如果未设置可选字段值，则使用默认值，数字类型为0，字符串为空字符串，bool为false
+// repeated : 该字段可以重复任意次数（包括零）。重复值的顺序将保留在协议缓冲区中。将重复字段视为动态大小的数组。phones可视为PhoneNumber类型的数组
+
+option optimize_for = CODE_SIZE;      // 与LITE_RUNTIME相反
+//option optimize_for = LITE_RUNTIME; // 适合资源受限的系统,但会降低性能，如手机端
+
+message Person {
+  required string name = 1;
+  required int32 id = 2;
+  optional string email = 3;
+
+  enum PhoneType {
+    MOBILE = 0;
+    HOME = 1;
+    WORK = 2;
+  }
+
+  message PhoneNumber {
+    required string number = 1;
+    optional PhoneType type = 2 [default = HOME];
+  }
+
+  repeated PhoneNumber phones = 4;
+}
+
+message AddressBook {
+  repeated Person people = 1;
+}
