@@ -30,6 +30,12 @@
     <ClInclude Include="..\proto-file\addressbook.pb.h">
       <Filter>protobuf-file</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\protoread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\protowrite.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -40,6 +46,12 @@
     </ClCompile>
     <ClCompile Include="..\proto-file\addressbook.pb.cc">
       <Filter>protobuf-file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\protoread.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\protowrite.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

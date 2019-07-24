@@ -6,7 +6,8 @@ google protobuf的使用
 	
 2、如何使用
     通过在.proto文件中定义协议缓冲区消息类型，可以指定要序列化的信息的结构。每个协议缓冲区message都是一个小的信息逻辑记录，包含一系列名称-值对，下面是.proto最基本的示例，它定义包含了关于一个人的个人信息：
-	
+
+// ......................................................第一个.proto文件.......................................................	
 message Person {
   required string name = 1;
   required int32 id = 2;
@@ -23,4 +24,14 @@ message Person {
   }
 
   repeated PhoneNumber phone = 4;
+  
+  // 表示扩展，如果其他的protobuf文件中import "xx/xx.proto";则可以扩展Preson字段，请看第二个文件
+  extensions 100 to 199;
+}
+
+// ......................................................第二个.proto文件.......................................................
+import "第一个文件.proto"
+
+extend Person {
+  optional int32 age = 126;
 }
